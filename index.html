@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Template</title>
+		<style>
+			*{margin:0; padding:0;}
+		</style>
+		<script src="js/analyzers.js"></script>
+	</head>
+
+	<body>
+		<script>
+			analyzers.init();
+			var peakMeter,spectrograph,so;
+			var ac=analyzers.ac;
+			
+			navigator.webkitGetUserMedia({audio: true}, function(stream){
+				so = ac.createMediaStreamSource(stream);
+				peakMeter=new analyzers.PeakMeter(so);
+				spectrograph=new analyzers.Spectrograph(so);
+				peakMeter.connect(ac.destination);
+				spectrograph.connect(ac.destination);
+			});
+			draw();
+			
+			function draw(){
+				requestAnimationFrame(draw);
+				if(peakMeter)peakMeter.render();
+				if(spectrograph)spectrograph.render();
+			}
+		</script>
+	</body>
+</html>

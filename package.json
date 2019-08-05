@@ -1,0 +1,8 @@
+{
+	"name": "nw-test",
+	"main": "index.html",
+	"window": {
+		"toolbar": true,
+		"icon":"app/img/ico.png"
+	}
+}
